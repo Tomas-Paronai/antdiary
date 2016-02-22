@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">AntDiary</string>
+
+    <!-- NAVIGATION -->
+    <string name="add_button">New</string>
+    <string name="view_button">View all</string>
+    <string name="album_button">Album</string>
+    <string name="info_button">Info</string>
+
+    <!-- NEWDATA-->
+    <string name="tv_name">Name:</string>
+    <string name="tv_race">Race:</string>
+    <string name="tv_age">Age:</string>
+    <string name="save_button">Save</string>
+
+    <!-- -->
+    <!-- -->
+    <!-- -->
+
+</resources>
