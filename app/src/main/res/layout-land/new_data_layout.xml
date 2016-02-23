@@ -13,8 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_toRightOf="@+id/breed_avatar"
         android:padding="10dp">
 
         <LinearLayout
@@ -108,5 +107,23 @@
 
 
     </LinearLayout>
+    <ImageButton
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:alpha="0.4"
+        android:id="@+id/breed_avatar"
+        android:src="@drawable/ic_add_box_black_36dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:textColor="@color/colorAccent"
+        android:textSize="20sp"
+        android:visibility="gone"
+        android:minHeight="1dp"
+        android:minWidth="1dp"
+        android:text="X"
+        android:id="@+id/remove_image"/>
 
 </RelativeLayout>

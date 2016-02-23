@@ -20,7 +20,6 @@ import parohyApps.antdiary.gui.BreedListAdapter;
 public class BreedHandle {
 
     private ArrayList<Breed> loadedBreed;
-    private BreedListAdapter adapter;
     private File dir;
 
     public BreedHandle(File dir){
@@ -94,4 +93,5 @@ public class BreedHandle {
         saveBreeds();
         loadBreeds(dir);
     }
+
 }

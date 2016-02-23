@@ -1,5 +1,7 @@
 package parohyApps.antdiary.data;
 
+import android.graphics.Bitmap;
+
 import java.io.Serializable;
 
 /**
@@ -10,6 +12,7 @@ public class Breed implements Serializable{
     private String name;
     private String race;
     private int age;
+    //private Bitmap avatarImage;
 
 
 
@@ -32,4 +35,11 @@ public class Breed implements Serializable{
     }
 
 
+    /*public Bitmap getAvatarImage() {
+        return avatarImage;
+    }
+
+    public void setAvatarImage(Bitmap avatarImage) {
+        this.avatarImage = avatarImage;
+    }*/
 }

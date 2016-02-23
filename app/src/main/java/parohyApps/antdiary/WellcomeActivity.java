@@ -4,6 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 
 import parohyApps.antdiary.fragments.Album;
@@ -85,7 +87,7 @@ public class WellcomeActivity extends AppCompatActivity implements Communicator 
             viewAllFragment = new ViewAll();
             ftra.add(R.id.view_all_holder, viewAllFragment, "viewAllFragment");
             ftra.show(viewAllFragment);
-            viewAllFragment.setState(true);
+            //viewAllFragment.setState(true);
 
             newDataFragment = new NewData();
             ftra.add(R.id.new_data_holder, newDataFragment, "newDataFragment");
@@ -162,5 +164,17 @@ public class WellcomeActivity extends AppCompatActivity implements Communicator 
         }
 
         ftra.commit();
+    }
+
+    public void viewContent(View v){
+        Toast.makeText(this, "view breed ", Toast.LENGTH_SHORT).show();
+    }
+
+    public void editContent(View v){
+        Toast.makeText(this, "edit breed ", Toast.LENGTH_SHORT).show();
+    }
+
+    public void deleteContent(View v){
+        Toast.makeText(this, "delete breed ", Toast.LENGTH_SHORT).show();
     }
 }

@@ -60,7 +60,8 @@
                 android:id="@+id/item_view_button"
                 android:src="@drawable/ic_description_black_24dp"
                 android:background="@color/main"
-                android:layout_marginLeft="4dp"/>
+                android:layout_marginLeft="4dp"
+                android:onClick="viewContent"/>
 
             <ImageButton
                 android:layout_width="wrap_content"
@@ -68,7 +69,8 @@
                 android:id="@+id/item_edit_button"
                 android:src="@drawable/ic_create_black_24dp"
                 android:background="@color/main"
-                android:layout_marginLeft="7dp"/>
+                android:layout_marginLeft="7dp"
+                android:onClick="editContent"/>
 
             <ImageButton
                 android:layout_width="wrap_content"
@@ -76,7 +78,8 @@
                 android:id="@+id/item_delete_button"
                 android:src="@drawable/ic_delete_forever_black_24dp"
                 android:background="@color/main"
-                android:layout_marginLeft="7dp"/>
+                android:layout_marginLeft="7dp"
+                android:onClick="deleteContent"/>
         </LinearLayout>
 
     </LinearLayout>
