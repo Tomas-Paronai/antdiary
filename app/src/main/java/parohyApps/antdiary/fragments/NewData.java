@@ -6,7 +6,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Environment;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,6 +21,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import parohyApps.antdiary.R;
+import parohyApps.antdiary.data.BitmapIO;
 import parohyApps.antdiary.data.Breed;
 import parohyApps.antdiary.data.BreedHandle;
 
@@ -31,6 +31,7 @@ import parohyApps.antdiary.data.BreedHandle;
 public class NewData extends ParentFragment implements View.OnClickListener{
 
     private int saveButtId, avatarButtId;
+    private boolean avatarSet;
     private final int PICK_AVATAR = 0;
     private BreedHandle breedHandler;
     private ImageButton avatarButt;
@@ -109,6 +110,8 @@ public class NewData extends ParentFragment implements View.OnClickListener{
         else if(v.getId() == R.id.remove_image){
             avatarButt.setImageDrawable(getResources().getDrawable(R.drawable.ic_add_box_black_36dp));
             v.setVisibility(View.GONE);
+            avatarButt.setAlpha(0.4f);
+            avatarSet = false;
         }
         else if(v.getId() == saveButtId){
             Log.d("NEW BREED","Save data");
@@ -136,9 +139,15 @@ public class NewData extends ParentFragment implements View.OnClickListener{
             if(canSave){
                 Breed tmpBreed = new Breed(breedName,breedRace,breedAge);
                 Bitmap pickedImage = ((BitmapDrawable)avatarButt.getDrawable()).getBitmap();
-                /*if(pickedImage != null){
-                    tmpBreed.setAvatarImage(pickedImage);
-                }*/
+                if(pickedImage != null && avatarSet){
+                    String id = tmpBreed.getName()+tmpBreed.getRace();
+                    BitmapIO bitmapSaver = new BitmapIO(Environment.getExternalStorageDirectory(),id,pickedImage);
+                    try {
+                        bitmapSaver.saveBitmap();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
                 breedHandler.insertBreed(tmpBreed);
                 reset();
             }
@@ -159,6 +168,8 @@ public class NewData extends ParentFragment implements View.OnClickListener{
                 inputStream.close();
                 avatarButt.setImageBitmap(pickedImage);
                 avatarButt.setScaleType(ImageView.ScaleType.FIT_XY);
+                avatarButt.setAlpha(1f);
+                avatarSet = true;
 
                 removeImageButt.setVisibility(View.VISIBLE);
             } catch (FileNotFoundException e) {
@@ -184,6 +195,8 @@ public class NewData extends ParentFragment implements View.OnClickListener{
         age.clearFocus();
 
         avatarButt.setImageDrawable(getResources().getDrawable(R.drawable.ic_add_box_black_36dp));
+        avatarButt.setAlpha(0.4f);
         removeImageButt.setVisibility(View.GONE);
+        avatarSet = false;
     }
 }

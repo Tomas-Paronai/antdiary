@@ -1,14 +1,12 @@
 package parohyApps.antdiary.fragments;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -19,15 +17,17 @@ import parohyApps.antdiary.data.Breed;
 import parohyApps.antdiary.data.BreedHandle;
 import parohyApps.antdiary.gui.BreedListAdapter;
 import parohyApps.antdiary.gui.ItemReaction;
+import parohyApps.antdiary.gui.Updateable;
 
 /**
  * Created by tomas on 2/16/2016.
  */
-public class ViewAll extends ParentFragment implements ItemReaction{
+public class ViewAll extends ParentFragment implements ItemReaction,Updateable{
 
     private BreedHandle breedHandler;
     private BreedListAdapter adapter;
     private ArrayList<Breed> breeds;
+    private ArrayList<Bitmap> breedPics;
     private View view;
 
     @Override
@@ -41,12 +41,13 @@ public class ViewAll extends ParentFragment implements ItemReaction{
         super.onViewCreated(view, savedInstanceState);
         breedHandler = new BreedHandle(Environment.getExternalStorageDirectory());
         breeds = breedHandler.getBreedList();
+        breedPics = breedHandler.getBitmapList();
         if(breeds != null){
             Log.d("VIEW_ALL", ""+breeds.size());
         }
 
 
-        adapter = new BreedListAdapter(this,R.layout.breed_list_item,breeds);
+        adapter = new BreedListAdapter(this,R.layout.breed_list_item,breeds,breedPics);
         ListView breedList = (ListView) view.findViewById(R.id.breed_list_view);
 
         breedList.setAdapter(adapter);
@@ -62,9 +63,6 @@ public class ViewAll extends ParentFragment implements ItemReaction{
     @Override
     public void setState(boolean state) {
         super.setState(state);
-        if(state){
-            adapter.notifyDataSetChanged();
-        }
     }
 
     @Override
@@ -81,4 +79,8 @@ public class ViewAll extends ParentFragment implements ItemReaction{
     }
 
 
+    @Override
+    public void updateInfo() {
+        adapter.notifyDataSetChanged();
+    }
 }

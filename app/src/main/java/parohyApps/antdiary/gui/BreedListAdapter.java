@@ -1,16 +1,13 @@
 package parohyApps.antdiary.gui;
 
-import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -24,13 +21,15 @@ import parohyApps.antdiary.fragments.ViewAll;
 public class BreedListAdapter extends ArrayAdapter<Breed> implements View.OnClickListener{
 
     private ArrayList<Breed> array;
+    private ArrayList<Bitmap> pics;
     private ItemReaction reaction;
 
 
-    public BreedListAdapter(ViewAll context, int resource, ArrayList<Breed> items) {
+    public BreedListAdapter(ViewAll context, int resource, ArrayList<Breed> items, ArrayList<Bitmap> pics) {
         super(context.getContext(), resource, items);
         reaction = (ItemReaction) context;
         array = items;
+        this.pics = pics;
     }
 
     @Override
@@ -48,10 +47,10 @@ public class BreedListAdapter extends ArrayAdapter<Breed> implements View.OnClic
             name.setText(currentBreed.getName());
             race.setText(currentBreed.getRace());
 
-            /*ImageView avatar = (ImageView) view.findViewById(R.id.item_image);
-            if(currentBreed.getAvatarImage() != null){
-            avatar.setImageBitmap(currentBreed.getAvatarImage());
-            }*/
+            ImageView avatar = (ImageView) view.findViewById(R.id.item_image);
+            if(pics != null && pics.get(position) != null){
+                avatar.setImageBitmap(pics.get(position));
+            }
 
             ImageButton show = (ImageButton) view.findViewById(R.id.item_view_button);
             ImageButton edit = (ImageButton) view.findViewById(R.id.item_edit_button);

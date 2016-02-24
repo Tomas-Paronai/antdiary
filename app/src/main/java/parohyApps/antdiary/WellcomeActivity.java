@@ -138,7 +138,7 @@ public class WellcomeActivity extends AppCompatActivity implements Communicator 
 
         else if(fragmentId == findViewById(R.id.view_button).getId()){
             ftra.show(viewAllFragment);
-            viewAllFragment.setState(true);
+            viewAllFragment.updateInfo();
 
             ftra.hide(newDataFragment); newDataFragment.setState(false);
             ftra.hide(albumFragment);albumFragment.setState(false);
@@ -147,7 +147,7 @@ public class WellcomeActivity extends AppCompatActivity implements Communicator 
 
         else if(fragmentId == findViewById(R.id.album_button).getId()){
             ftra.show(albumFragment);
-            albumFragment.setState(true);
+
 
             ftra.hide(newDataFragment); newDataFragment.setState(false);
             ftra.hide(viewAllFragment); viewAllFragment.setState(false);
@@ -156,7 +156,7 @@ public class WellcomeActivity extends AppCompatActivity implements Communicator 
 
         else if(fragmentId == findViewById(R.id.info_button).getId()){
             ftra.show(infoFragment);
-            infoFragment.setState(true);
+
 
             ftra.hide(newDataFragment); newDataFragment.setState(false);
             ftra.hide(albumFragment); albumFragment.setState(false);

@@ -1,6 +1,8 @@
 package parohyApps.antdiary.data;
 
-import android.widget.ArrayAdapter;
+
+import android.graphics.Bitmap;
+import android.util.Log;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,7 +14,6 @@ import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 
-import parohyApps.antdiary.gui.BreedListAdapter;
 
 /**
  * Created by tomas on 2/16/2016.
@@ -20,6 +21,7 @@ import parohyApps.antdiary.gui.BreedListAdapter;
 public class BreedHandle {
 
     private ArrayList<Breed> loadedBreed;
+    private ArrayList<Bitmap> loadedBitmap;
     private File dir;
 
     public BreedHandle(File dir){
@@ -31,6 +33,7 @@ public class BreedHandle {
         File inputFile = new File(dir, "breed.dat");
         if(inputFile.exists()) {
             try {
+                Log.d("BreedHandle","Loading breeds");
                 FileInputStream inputStream = new FileInputStream(inputFile);
                 loadedBreed = new ArrayList<>();
                 ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
@@ -38,7 +41,6 @@ public class BreedHandle {
                 while (true) {
                     loadedBreed.add((Breed) objectInputStream.readObject());
                 }
-
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (StreamCorruptedException e) {
@@ -47,6 +49,22 @@ public class BreedHandle {
                 e.printStackTrace();
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
+            }
+            loadBitmaps(dir);
+        }
+    }
+
+    private void loadBitmaps(File dir){
+        if(loadedBreed != null){
+            loadedBitmap = new ArrayList<>();
+            for(Breed tmpBreed : loadedBreed){
+                String name = tmpBreed.getName() + tmpBreed.getRace();
+                BitmapIO bitmapLoader = new BitmapIO(dir,name);
+                try {
+                    loadedBitmap.add(bitmapLoader.loadBitmap());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -84,8 +102,24 @@ public class BreedHandle {
         }
     }
 
+    private void saveBitmap(){
+        if(loadedBreed != null && loadedBitmap != null && dir != null){
+            for(Breed tmpBreed : loadedBreed){
+
+            }
+            //BitmapIO bitmapSaver = new BitmapIO(dir,)
+        }
+    }
+
     public ArrayList<Breed> getBreedList(){
+        if(loadedBreed == null){
+            loadedBreed = new ArrayList<>();
+        }
         return loadedBreed;
+    }
+
+    public ArrayList<Bitmap> getBitmapList(){
+        return loadedBitmap;
     }
 
     public void deleteBreed(int index){
