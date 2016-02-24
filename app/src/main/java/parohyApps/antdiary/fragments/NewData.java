@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Environment;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -108,7 +109,7 @@ public class NewData extends ParentFragment implements View.OnClickListener{
             startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_AVATAR);
         }
         else if(v.getId() == R.id.remove_image){
-            avatarButt.setImageDrawable(getResources().getDrawable(R.drawable.ic_add_box_black_36dp));
+            avatarButt.setImageDrawable(ContextCompat.getDrawable(this.getContext(),R.drawable.ic_add_box_black_36dp));
             v.setVisibility(View.GONE);
             avatarButt.setAlpha(0.4f);
             avatarSet = false;
@@ -194,7 +195,7 @@ public class NewData extends ParentFragment implements View.OnClickListener{
         race.clearFocus();
         age.clearFocus();
 
-        avatarButt.setImageDrawable(getResources().getDrawable(R.drawable.ic_add_box_black_36dp));
+        avatarButt.setImageDrawable(ContextCompat.getDrawable(this.getContext(),R.drawable.ic_add_box_black_36dp));
         avatarButt.setAlpha(0.4f);
         removeImageButt.setVisibility(View.GONE);
         avatarSet = false;
